@@ -49,19 +49,21 @@
             this.pcbLogo = new System.Windows.Forms.PictureBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.erpError = new System.Windows.Forms.ErrorProvider(this.components);
+            this.erpErrorCB = new System.Windows.Forms.ErrorProvider(this.components);
             this.Hora = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Lunes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Martes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Miercoles = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Jueves = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Viernes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.erpErrorLB = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvHorario)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsDatos)).BeginInit();
             this.grbHorario.SuspendLayout();
             this.grbDatosCurso.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbLogo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.erpError)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.erpErrorCB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.erpErrorLB)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvHorario
@@ -79,9 +81,11 @@
             this.Viernes});
             this.dgvHorario.Location = new System.Drawing.Point(13, 13);
             this.dgvHorario.Name = "dgvHorario";
+            this.dgvHorario.ReadOnly = true;
             this.dgvHorario.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvHorario.Size = new System.Drawing.Size(778, 272);
             this.dgvHorario.TabIndex = 0;
+            this.dgvHorario.Click += new System.EventHandler(this.dgvHorario_Click);
             // 
             // dsDatos
             // 
@@ -114,6 +118,7 @@
             this.cmbDia.Name = "cmbDia";
             this.cmbDia.Size = new System.Drawing.Size(135, 21);
             this.cmbDia.TabIndex = 3;
+            this.cmbDia.SelectedIndexChanged += new System.EventHandler(this.cmbDia_SelectedIndexChanged);
             // 
             // cmbHora
             // 
@@ -129,6 +134,7 @@
             this.cmbHora.Name = "cmbHora";
             this.cmbHora.Size = new System.Drawing.Size(135, 21);
             this.cmbHora.TabIndex = 2;
+            this.cmbHora.SelectedIndexChanged += new System.EventHandler(this.cmbHora_SelectedIndexChanged);
             // 
             // lblDia
             // 
@@ -283,10 +289,10 @@
             this.btnDelete.TabIndex = 7;
             this.btnDelete.UseVisualStyleBackColor = false;
             // 
-            // erpError
+            // erpErrorCB
             // 
-            this.erpError.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
-            this.erpError.ContainerControl = this;
+            this.erpErrorCB.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.erpErrorCB.ContainerControl = this;
             // 
             // Hora
             // 
@@ -318,6 +324,11 @@
             this.Viernes.HeaderText = "Viernes";
             this.Viernes.Name = "Viernes";
             // 
+            // erpErrorLB
+            // 
+            this.erpErrorLB.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.erpErrorLB.ContainerControl = this;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -332,6 +343,7 @@
             this.Controls.Add(this.grbHorario);
             this.Controls.Add(this.dgvHorario);
             this.Name = "frmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HORARIO CIFPVG Diego";
             this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvHorario)).EndInit();
@@ -341,7 +353,8 @@
             this.grbDatosCurso.ResumeLayout(false);
             this.grbDatosCurso.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbLogo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.erpError)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.erpErrorCB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.erpErrorLB)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -367,13 +380,14 @@
         private System.Windows.Forms.PictureBox pcbLogo;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.ErrorProvider erpError;
+        private System.Windows.Forms.ErrorProvider erpErrorCB;
         private System.Windows.Forms.DataGridViewTextBoxColumn Hora;
         private System.Windows.Forms.DataGridViewTextBoxColumn Lunes;
         private System.Windows.Forms.DataGridViewTextBoxColumn Martes;
         private System.Windows.Forms.DataGridViewTextBoxColumn Miercoles;
         private System.Windows.Forms.DataGridViewTextBoxColumn Jueves;
         private System.Windows.Forms.DataGridViewTextBoxColumn Viernes;
+        private System.Windows.Forms.ErrorProvider erpErrorLB;
     }
 }
 
