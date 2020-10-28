@@ -2,9 +2,9 @@ D:\Users\diego\Desktop\REPOSITORIOS\INTERFACES\Horario\HorarioXML\HorarioXML\bin
 D:\Users\diego\Desktop\REPOSITORIOS\INTERFACES\Horario\HorarioXML\HorarioXML\bin\Debug\HorarioXML.exe
 D:\Users\diego\Desktop\REPOSITORIOS\INTERFACES\Horario\HorarioXML\HorarioXML\bin\Debug\HorarioXML.pdb
 D:\Users\diego\Desktop\REPOSITORIOS\INTERFACES\Horario\HorarioXML\HorarioXML\obj\Debug\HorarioXML.csprojAssemblyReference.cache
-D:\Users\diego\Desktop\REPOSITORIOS\INTERFACES\Horario\HorarioXML\HorarioXML\obj\Debug\HorarioXML.Form1.resources
 D:\Users\diego\Desktop\REPOSITORIOS\INTERFACES\Horario\HorarioXML\HorarioXML\obj\Debug\HorarioXML.Properties.Resources.resources
 D:\Users\diego\Desktop\REPOSITORIOS\INTERFACES\Horario\HorarioXML\HorarioXML\obj\Debug\HorarioXML.csproj.GenerateResource.cache
 D:\Users\diego\Desktop\REPOSITORIOS\INTERFACES\Horario\HorarioXML\HorarioXML\obj\Debug\HorarioXML.csproj.CoreCompileInputs.cache
 D:\Users\diego\Desktop\REPOSITORIOS\INTERFACES\Horario\HorarioXML\HorarioXML\obj\Debug\HorarioXML.exe
 D:\Users\diego\Desktop\REPOSITORIOS\INTERFACES\Horario\HorarioXML\HorarioXML\obj\Debug\HorarioXML.pdb
+D:\Users\diego\Desktop\REPOSITORIOS\INTERFACES\Horario\HorarioXML\HorarioXML\obj\Debug\HorarioXML.frmMain.resources
