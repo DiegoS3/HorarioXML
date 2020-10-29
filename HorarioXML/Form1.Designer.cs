@@ -31,6 +31,12 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.dgvHorario = new System.Windows.Forms.DataGridView();
+            this.Hora = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Lunes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Martes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Miercoles = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Jueves = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Viernes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dsDatos = new System.Data.DataSet();
             this.grbHorario = new System.Windows.Forms.GroupBox();
             this.cmbDia = new System.Windows.Forms.ComboBox();
@@ -50,13 +56,8 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.erpErrorCB = new System.Windows.Forms.ErrorProvider(this.components);
-            this.Hora = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Lunes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Martes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Miercoles = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Jueves = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Viernes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.erpErrorLB = new System.Windows.Forms.ErrorProvider(this.components);
+            this.ofdAbrir = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHorario)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsDatos)).BeginInit();
             this.grbHorario.SuspendLayout();
@@ -86,6 +87,42 @@
             this.dgvHorario.Size = new System.Drawing.Size(778, 272);
             this.dgvHorario.TabIndex = 0;
             this.dgvHorario.Click += new System.EventHandler(this.dgvHorario_Click);
+            // 
+            // Hora
+            // 
+            this.Hora.HeaderText = "Hora";
+            this.Hora.Name = "Hora";
+            this.Hora.ReadOnly = true;
+            // 
+            // Lunes
+            // 
+            this.Lunes.HeaderText = "Lunes";
+            this.Lunes.Name = "Lunes";
+            this.Lunes.ReadOnly = true;
+            // 
+            // Martes
+            // 
+            this.Martes.HeaderText = "Martes";
+            this.Martes.Name = "Martes";
+            this.Martes.ReadOnly = true;
+            // 
+            // Miercoles
+            // 
+            this.Miercoles.HeaderText = "Miercoles";
+            this.Miercoles.Name = "Miercoles";
+            this.Miercoles.ReadOnly = true;
+            // 
+            // Jueves
+            // 
+            this.Jueves.HeaderText = "Jueves";
+            this.Jueves.Name = "Jueves";
+            this.Jueves.ReadOnly = true;
+            // 
+            // Viernes
+            // 
+            this.Viernes.HeaderText = "Viernes";
+            this.Viernes.Name = "Viernes";
+            this.Viernes.ReadOnly = true;
             // 
             // dsDatos
             // 
@@ -244,6 +281,7 @@
             this.btnGuardar.TabIndex = 3;
             this.btnGuardar.Text = "GUARDAR HORARIO";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // btnCargar
             // 
@@ -254,6 +292,7 @@
             this.btnCargar.TabIndex = 4;
             this.btnCargar.Text = "CARGAR HORARIO";
             this.btnCargar.UseVisualStyleBackColor = true;
+            this.btnCargar.Click += new System.EventHandler(this.btnCargar_Click);
             // 
             // pcbLogo
             // 
@@ -288,46 +327,21 @@
             this.btnDelete.Size = new System.Drawing.Size(44, 42);
             this.btnDelete.TabIndex = 7;
             this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // erpErrorCB
             // 
             this.erpErrorCB.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.erpErrorCB.ContainerControl = this;
             // 
-            // Hora
-            // 
-            this.Hora.HeaderText = "Hora";
-            this.Hora.Name = "Hora";
-            // 
-            // Lunes
-            // 
-            this.Lunes.HeaderText = "Lunes";
-            this.Lunes.Name = "Lunes";
-            // 
-            // Martes
-            // 
-            this.Martes.HeaderText = "Martes";
-            this.Martes.Name = "Martes";
-            // 
-            // Miercoles
-            // 
-            this.Miercoles.HeaderText = "Miercoles";
-            this.Miercoles.Name = "Miercoles";
-            // 
-            // Jueves
-            // 
-            this.Jueves.HeaderText = "Jueves";
-            this.Jueves.Name = "Jueves";
-            // 
-            // Viernes
-            // 
-            this.Viernes.HeaderText = "Viernes";
-            this.Viernes.Name = "Viernes";
-            // 
             // erpErrorLB
             // 
             this.erpErrorLB.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.erpErrorLB.ContainerControl = this;
+            // 
+            // ofdAbrir
+            // 
+            this.ofdAbrir.FileName = "openFileDialog1";
             // 
             // frmMain
             // 
@@ -388,6 +402,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Jueves;
         private System.Windows.Forms.DataGridViewTextBoxColumn Viernes;
         private System.Windows.Forms.ErrorProvider erpErrorLB;
+        private System.Windows.Forms.OpenFileDialog ofdAbrir;
     }
 }
 
