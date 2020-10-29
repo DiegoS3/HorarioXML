@@ -58,6 +58,7 @@
             this.erpErrorCB = new System.Windows.Forms.ErrorProvider(this.components);
             this.erpErrorLB = new System.Windows.Forms.ErrorProvider(this.components);
             this.ofdAbrir = new System.Windows.Forms.OpenFileDialog();
+            this.sfdGuardar = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHorario)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsDatos)).BeginInit();
             this.grbHorario.SuspendLayout();
@@ -342,6 +343,11 @@
             // ofdAbrir
             // 
             this.ofdAbrir.FileName = "openFileDialog1";
+            this.ofdAbrir.Filter = "Documentos XML (*.xml) | *.xml";
+            // 
+            // sfdGuardar
+            // 
+            this.sfdGuardar.Filter = "Documentos XML (*.xml) | *.xml";
             // 
             // frmMain
             // 
@@ -403,6 +409,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Viernes;
         private System.Windows.Forms.ErrorProvider erpErrorLB;
         private System.Windows.Forms.OpenFileDialog ofdAbrir;
+        private System.Windows.Forms.SaveFileDialog sfdGuardar;
     }
 }
 

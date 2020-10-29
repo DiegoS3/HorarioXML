@@ -145,14 +145,14 @@ namespace HorarioXML
                     //La primera columna de cada fila será la hora: primera, segunda, etc.
                     fila_pant[0] = hora.GetAttribute("id").ToString();
                     fila_ayu[0] = "";
-                    int col = 1;
+                    int col = 0;
                     XmlNodeList dias = hora.GetElementsByTagName("dia");
                     foreach (XmlElement dia in dias)
                     {
-                        XmlNodeList entrada_pant = dia.GetElementsByTagName("pantalla");
+                        XmlNodeList entrada_pant = dia.GetElementsByTagName("asignatura");
                         fila_pant[col] = ((XmlElement)entrada_pant[0]).InnerText.ToString();
-                        XmlNodeList entrada_ayu = dia.GetElementsByTagName("ayuda");
-                        fila_ayu[col] = ((XmlElement)entrada_ayu[0]).InnerText.ToString();
+                        //XmlNodeList entrada_ayu = dia.GetElementsByTagName("ayuda");
+                        ///fila_ayu[col] = ((XmlElement)entrada_ayu[0]).InnerText.ToString();
                         col++;
                     }
                     dsDatos.Tables[0].Rows.Add(fila_pant);
@@ -184,48 +184,54 @@ namespace HorarioXML
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-           
+            generarXML();
         }
 
         private void generarXML()
         {
-            //1º se crea el elemento raíz y se asocia al documento
-            XmlDocument xDoc = new XmlDocument();
-            XmlElement elementoRaiz = xDoc.CreateElement(string.Empty, "horario", string.Empty);
-            xDoc.AppendChild(elementoRaiz);
 
-            for (int i = 0; i < dgvHorario.Rows.Count; i++)
+            if (sfdGuardar.ShowDialog() == DialogResult.OK)
             {
-                XmlElement xHora = xDoc.CreateElement(string.Empty, "hora", string.Empty);
-                //El atributo id con la hora se puede sacar de la primera columna del DataGridView
-                xHora.SetAttribute("id", dgvHorario.Rows[i].Cells[0].Value.ToString());
+                //se crea el elemento raíz y se asocia al documento
+                XmlDocument xDoc = new XmlDocument();
+                XmlElement elementoRaiz = xDoc.CreateElement(string.Empty, "horario", string.Empty);
+                xDoc.AppendChild(elementoRaiz);
 
-                for (int j = 0; j < dgvHorario.Columns.Count; j++)
+                for (int i = 0; i < dgvHorario.Rows.Count; i++)
                 {
-                    XmlElement xDia = xDoc.CreateElement(string.Empty, "dia", string.Empty);
-                    XmlElement xAsignatura = xDoc.CreateElement(string.Empty, "asignatura", string.Empty);
-                    XmlElement xAyuda = xDoc.CreateElement(string.Empty, "ayuda", string.Empty);                    XmlText xTxAsignatura = xDoc.CreateTextNode(dgvHorario.Rows[i].Cells[j + 1].Value.ToString());
-                    xAsignatura.AppendChild(xTxAsignatura);
-                    XmlText xTxAyuda = xDoc.CreateTextNode(dgvHorario.Rows[i].Cells[j + 1].ToolTipText);
-                    xAyuda.AppendChild(xTxAyuda);
+                    XmlElement xHora = xDoc.CreateElement(string.Empty, "hora", string.Empty);
+                    //El atributo id con la hora se puede sacar de la primera columna del DataGridView
+                    xHora.SetAttribute("id", dgvHorario.Rows[i].Cells[0].Value.ToString());
 
-                    xDia.AppendChild(xAsignatura);
-                    xDia.AppendChild(xAyuda);
-                    xHora.AppendChild(xDia);
+                    for (int j = 0; j < dgvHorario.Columns.Count; j++)
+                    {
+                        XmlElement xDia = xDoc.CreateElement(string.Empty, "dia", string.Empty);
+                        XmlElement xAsignatura = xDoc.CreateElement(string.Empty, "asignatura", string.Empty);
+                        XmlElement xAyuda = xDoc.CreateElement(string.Empty, "ayuda", string.Empty);
+
+                        XmlText xTxAsignatura = xDoc.CreateTextNode(dgvHorario.Rows[i].Cells[j].Value.ToString());
+                        xAsignatura.AppendChild(xTxAsignatura);
+                        XmlText xTxAyuda = xDoc.CreateTextNode(dgvHorario.Rows[i].Cells[j].ToolTipText);
+                        xAyuda.AppendChild(xTxAyuda);
+
+                        xDia.AppendChild(xAsignatura);
+                        xDia.AppendChild(xAyuda);
+                        xHora.AppendChild(xDia);
+                    }
+
+                    elementoRaiz.AppendChild(xHora);
+
                 }
 
-                elementoRaiz.AppendChild(xHora);
-
+                //Ahora vamos a guardar el documento con formato correcto (suponiendo que la ruta la
+                //devuelve el SaveFileDialog sfdGuardar
+                XmlTextWriter xtw = new XmlTextWriter(sfdGuardar.FileName, Encoding.UTF8);
+                xtw.Formatting = Formatting.Indented;
+                xDoc.Save(xtw);
+                xtw.Close();
+                MessageBox.Show("Se ha guardado con exito el horario",
+                    "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-            //Ahora vamos a guardar el documento con formato correcto (suponiendo que la ruta la
-            //devuelve el SaveFileDialog sfdGuardar
-            XmlTextWriter xtw = new XmlTextWriter("prueba.xml", Encoding.UTF8);
-            xtw.Formatting = Formatting.Indented;
-            xDoc.Save(xtw);
-            xtw.Close();
-
-
         }
 
         private void comprobarSeleccion()
