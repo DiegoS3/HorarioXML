@@ -33,29 +33,33 @@
             this.dgvHorario = new System.Windows.Forms.DataGridView();
             this.dsDatos = new System.Data.DataSet();
             this.grbHorario = new System.Windows.Forms.GroupBox();
-            this.lblHora = new System.Windows.Forms.Label();
-            this.lblDia = new System.Windows.Forms.Label();
-            this.cmbHora = new System.Windows.Forms.ComboBox();
             this.cmbDia = new System.Windows.Forms.ComboBox();
+            this.cmbHora = new System.Windows.Forms.ComboBox();
+            this.lblDia = new System.Windows.Forms.Label();
+            this.lblHora = new System.Windows.Forms.Label();
             this.grbDatosCurso = new System.Windows.Forms.GroupBox();
-            this.lblCiclo = new System.Windows.Forms.Label();
-            this.lblModulo = new System.Windows.Forms.Label();
-            this.lblCurso = new System.Windows.Forms.Label();
-            this.cmbCurso = new System.Windows.Forms.ComboBox();
-            this.lsbModulo = new System.Windows.Forms.ListBox();
             this.lsbCiclo = new System.Windows.Forms.ListBox();
+            this.lsbModulo = new System.Windows.Forms.ListBox();
+            this.cmbCurso = new System.Windows.Forms.ComboBox();
+            this.lblCurso = new System.Windows.Forms.Label();
+            this.lblModulo = new System.Windows.Forms.Label();
+            this.lblCiclo = new System.Windows.Forms.Label();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnCargar = new System.Windows.Forms.Button();
             this.pcbLogo = new System.Windows.Forms.PictureBox();
-            this.btnAbrir = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.erpError = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.erpErrorCB = new System.Windows.Forms.ErrorProvider(this.components);
+            this.erpErrorLB = new System.Windows.Forms.ErrorProvider(this.components);
+            this.ofdAbrir = new System.Windows.Forms.OpenFileDialog();
+            this.sfdGuardar = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHorario)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsDatos)).BeginInit();
             this.grbHorario.SuspendLayout();
             this.grbDatosCurso.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbLogo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.erpError)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.erpErrorCB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.erpErrorLB)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvHorario
@@ -63,16 +67,21 @@
             this.dgvHorario.AllowUserToAddRows = false;
             this.dgvHorario.AllowUserToDeleteRows = false;
             this.dgvHorario.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvHorario.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dgvHorario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvHorario.Location = new System.Drawing.Point(13, 13);
+            this.dgvHorario.MultiSelect = false;
             this.dgvHorario.Name = "dgvHorario";
+            this.dgvHorario.ReadOnly = true;
             this.dgvHorario.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvHorario.Size = new System.Drawing.Size(778, 272);
             this.dgvHorario.TabIndex = 0;
+            this.dgvHorario.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHorario_CellValueChanged);
+            this.dgvHorario.Click += new System.EventHandler(this.dgvHorario_Click);
             // 
             // dsDatos
             // 
-            this.dsDatos.DataSetName = "NewDataSet";
+            this.dsDatos.DataSetName = "dsDatos";
             // 
             // grbHorario
             // 
@@ -88,23 +97,20 @@
             this.grbHorario.TabStop = false;
             this.grbHorario.Text = "Horario";
             // 
-            // lblHora
+            // cmbDia
             // 
-            this.lblHora.AutoSize = true;
-            this.lblHora.Location = new System.Drawing.Point(10, 29);
-            this.lblHora.Name = "lblHora";
-            this.lblHora.Size = new System.Drawing.Size(34, 13);
-            this.lblHora.TabIndex = 0;
-            this.lblHora.Text = "Hora";
-            // 
-            // lblDia
-            // 
-            this.lblDia.AutoSize = true;
-            this.lblDia.Location = new System.Drawing.Point(10, 68);
-            this.lblDia.Name = "lblDia";
-            this.lblDia.Size = new System.Drawing.Size(28, 13);
-            this.lblDia.TabIndex = 1;
-            this.lblDia.Text = "Día";
+            this.cmbDia.FormattingEnabled = true;
+            this.cmbDia.Items.AddRange(new object[] {
+            "Lunes",
+            "Martes",
+            "Miercoles",
+            "Jueves",
+            "Viernes"});
+            this.cmbDia.Location = new System.Drawing.Point(73, 65);
+            this.cmbDia.Name = "cmbDia";
+            this.cmbDia.Size = new System.Drawing.Size(135, 21);
+            this.cmbDia.TabIndex = 3;
+            this.cmbDia.SelectedIndexChanged += new System.EventHandler(this.cmbDia_SelectedIndexChanged);
             // 
             // cmbHora
             // 
@@ -120,20 +126,25 @@
             this.cmbHora.Name = "cmbHora";
             this.cmbHora.Size = new System.Drawing.Size(135, 21);
             this.cmbHora.TabIndex = 2;
+            this.cmbHora.SelectedIndexChanged += new System.EventHandler(this.cmbHora_SelectedIndexChanged);
             // 
-            // cmbDia
+            // lblDia
             // 
-            this.cmbDia.FormattingEnabled = true;
-            this.cmbDia.Items.AddRange(new object[] {
-            "Lunes",
-            "Martes",
-            "Miercoles",
-            "Jueves",
-            "Viernes"});
-            this.cmbDia.Location = new System.Drawing.Point(73, 65);
-            this.cmbDia.Name = "cmbDia";
-            this.cmbDia.Size = new System.Drawing.Size(135, 21);
-            this.cmbDia.TabIndex = 3;
+            this.lblDia.AutoSize = true;
+            this.lblDia.Location = new System.Drawing.Point(10, 68);
+            this.lblDia.Name = "lblDia";
+            this.lblDia.Size = new System.Drawing.Size(28, 13);
+            this.lblDia.TabIndex = 1;
+            this.lblDia.Text = "Día";
+            // 
+            // lblHora
+            // 
+            this.lblHora.AutoSize = true;
+            this.lblHora.Location = new System.Drawing.Point(10, 29);
+            this.lblHora.Name = "lblHora";
+            this.lblHora.Size = new System.Drawing.Size(34, 13);
+            this.lblHora.TabIndex = 0;
+            this.lblHora.Text = "Hora";
             // 
             // grbDatosCurso
             // 
@@ -151,32 +162,25 @@
             this.grbDatosCurso.TabStop = false;
             this.grbDatosCurso.Text = "Datos del Curso";
             // 
-            // lblCiclo
+            // lsbCiclo
             // 
-            this.lblCiclo.AutoSize = true;
-            this.lblCiclo.Location = new System.Drawing.Point(19, 33);
-            this.lblCiclo.Name = "lblCiclo";
-            this.lblCiclo.Size = new System.Drawing.Size(35, 13);
-            this.lblCiclo.TabIndex = 0;
-            this.lblCiclo.Text = "Ciclo";
+            this.lsbCiclo.FormattingEnabled = true;
+            this.lsbCiclo.Items.AddRange(new object[] {
+            "DAM",
+            "DAW"});
+            this.lsbCiclo.Location = new System.Drawing.Point(22, 65);
+            this.lsbCiclo.Name = "lsbCiclo";
+            this.lsbCiclo.Size = new System.Drawing.Size(176, 173);
+            this.lsbCiclo.TabIndex = 6;
+            this.lsbCiclo.SelectedIndexChanged += new System.EventHandler(this.lsbCiclo_SelectedIndexChanged);
             // 
-            // lblModulo
+            // lsbModulo
             // 
-            this.lblModulo.AutoSize = true;
-            this.lblModulo.Location = new System.Drawing.Point(235, 65);
-            this.lblModulo.Name = "lblModulo";
-            this.lblModulo.Size = new System.Drawing.Size(54, 13);
-            this.lblModulo.TabIndex = 1;
-            this.lblModulo.Text = "Módulos";
-            // 
-            // lblCurso
-            // 
-            this.lblCurso.AutoSize = true;
-            this.lblCurso.Location = new System.Drawing.Point(235, 33);
-            this.lblCurso.Name = "lblCurso";
-            this.lblCurso.Size = new System.Drawing.Size(39, 13);
-            this.lblCurso.TabIndex = 2;
-            this.lblCurso.Text = "Curso";
+            this.lsbModulo.FormattingEnabled = true;
+            this.lsbModulo.Location = new System.Drawing.Point(238, 91);
+            this.lsbModulo.Name = "lsbModulo";
+            this.lsbModulo.Size = new System.Drawing.Size(300, 147);
+            this.lsbModulo.TabIndex = 5;
             // 
             // cmbCurso
             // 
@@ -188,32 +192,34 @@
             this.cmbCurso.Name = "cmbCurso";
             this.cmbCurso.Size = new System.Drawing.Size(173, 21);
             this.cmbCurso.TabIndex = 4;
+            this.cmbCurso.SelectedIndexChanged += new System.EventHandler(this.cmbCurso_SelectedIndexChanged);
             // 
-            // lsbModulo
+            // lblCurso
             // 
-            this.lsbModulo.FormattingEnabled = true;
-            this.lsbModulo.Items.AddRange(new object[] {
-            "ACCESO A DATOS",
-            "DESARROLLO DE INTERFACES",
-            "SISTEMAS DE GESTIÓN EMPRESARIAL",
-            "EMPRESA E INICIATIVA EMPRENDEDORA",
-            "PROGR. DE SERVICIOS Y PROCESOS",
-            "PROGR. MULTIMEDIA Y DISPOSITIVOS MÓVILES"});
-            this.lsbModulo.Location = new System.Drawing.Point(238, 91);
-            this.lsbModulo.Name = "lsbModulo";
-            this.lsbModulo.Size = new System.Drawing.Size(300, 147);
-            this.lsbModulo.TabIndex = 5;
+            this.lblCurso.AutoSize = true;
+            this.lblCurso.Location = new System.Drawing.Point(235, 33);
+            this.lblCurso.Name = "lblCurso";
+            this.lblCurso.Size = new System.Drawing.Size(39, 13);
+            this.lblCurso.TabIndex = 2;
+            this.lblCurso.Text = "Curso";
             // 
-            // lsbCiclo
+            // lblModulo
             // 
-            this.lsbCiclo.FormattingEnabled = true;
-            this.lsbCiclo.Items.AddRange(new object[] {
-            "DAM",
-            "DAW"});
-            this.lsbCiclo.Location = new System.Drawing.Point(22, 65);
-            this.lsbCiclo.Name = "lsbCiclo";
-            this.lsbCiclo.Size = new System.Drawing.Size(176, 173);
-            this.lsbCiclo.TabIndex = 6;
+            this.lblModulo.AutoSize = true;
+            this.lblModulo.Location = new System.Drawing.Point(235, 65);
+            this.lblModulo.Name = "lblModulo";
+            this.lblModulo.Size = new System.Drawing.Size(54, 13);
+            this.lblModulo.TabIndex = 1;
+            this.lblModulo.Text = "Módulos";
+            // 
+            // lblCiclo
+            // 
+            this.lblCiclo.AutoSize = true;
+            this.lblCiclo.Location = new System.Drawing.Point(19, 33);
+            this.lblCiclo.Name = "lblCiclo";
+            this.lblCiclo.Size = new System.Drawing.Size(35, 13);
+            this.lblCiclo.TabIndex = 0;
+            this.lblCiclo.Text = "Ciclo";
             // 
             // btnGuardar
             // 
@@ -225,6 +231,7 @@
             this.btnGuardar.TabIndex = 3;
             this.btnGuardar.Text = "GUARDAR HORARIO";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // btnCargar
             // 
@@ -235,6 +242,7 @@
             this.btnCargar.TabIndex = 4;
             this.btnCargar.Text = "CARGAR HORARIO";
             this.btnCargar.UseVisualStyleBackColor = true;
+            this.btnCargar.Click += new System.EventHandler(this.btnCargar_Click);
             // 
             // pcbLogo
             // 
@@ -246,41 +254,66 @@
             this.pcbLogo.TabIndex = 5;
             this.pcbLogo.TabStop = false;
             // 
-            // btnAbrir
+            // btnAdd
             // 
-            this.btnAbrir.BackColor = System.Drawing.Color.Transparent;
-            this.btnAbrir.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAbrir.BackgroundImage")));
-            this.btnAbrir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnAbrir.ForeColor = System.Drawing.Color.Transparent;
-            this.btnAbrir.Location = new System.Drawing.Point(747, 573);
-            this.btnAbrir.Name = "btnAbrir";
-            this.btnAbrir.Size = new System.Drawing.Size(44, 42);
-            this.btnAbrir.TabIndex = 6;
-            this.btnAbrir.UseVisualStyleBackColor = false;
+            this.btnAdd.BackColor = System.Drawing.Color.Transparent;
+            this.btnAdd.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAdd.BackgroundImage")));
+            this.btnAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnAdd.FlatAppearance.BorderSize = 0;
+            this.btnAdd.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnAdd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.ForeColor = System.Drawing.Color.Transparent;
+            this.btnAdd.Location = new System.Drawing.Point(747, 569);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(44, 42);
+            this.btnAdd.TabIndex = 6;
+            this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // btnSave
+            // btnDelete
             // 
-            this.btnSave.BackColor = System.Drawing.Color.Transparent;
-            this.btnSave.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSave.BackgroundImage")));
-            this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnSave.Location = new System.Drawing.Point(687, 573);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(44, 42);
-            this.btnSave.TabIndex = 7;
-            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnDelete.BackColor = System.Drawing.Color.Transparent;
+            this.btnDelete.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnDelete.BackgroundImage")));
+            this.btnDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnDelete.FlatAppearance.BorderSize = 0;
+            this.btnDelete.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Location = new System.Drawing.Point(701, 572);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(39, 38);
+            this.btnDelete.TabIndex = 7;
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // erpError
+            // erpErrorCB
             // 
-            this.erpError.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
-            this.erpError.ContainerControl = this;
+            this.erpErrorCB.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.erpErrorCB.ContainerControl = this;
+            // 
+            // erpErrorLB
+            // 
+            this.erpErrorLB.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.erpErrorLB.ContainerControl = this;
+            // 
+            // ofdAbrir
+            // 
+            this.ofdAbrir.FileName = "openFileDialog1";
+            this.ofdAbrir.Filter = "Documentos XML (*.xml) | *.xml";
+            // 
+            // sfdGuardar
+            // 
+            this.sfdGuardar.Filter = "Documentos XML (*.xml) | *.xml";
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(803, 626);
-            this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.btnAbrir);
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.ClientSize = new System.Drawing.Size(803, 613);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.pcbLogo);
             this.Controls.Add(this.btnCargar);
             this.Controls.Add(this.btnGuardar);
@@ -288,7 +321,9 @@
             this.Controls.Add(this.grbHorario);
             this.Controls.Add(this.dgvHorario);
             this.Name = "frmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HORARIO CIFPVG Diego";
+            this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvHorario)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsDatos)).EndInit();
             this.grbHorario.ResumeLayout(false);
@@ -296,7 +331,8 @@
             this.grbDatosCurso.ResumeLayout(false);
             this.grbDatosCurso.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbLogo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.erpError)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.erpErrorCB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.erpErrorLB)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -320,9 +356,12 @@
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnCargar;
         private System.Windows.Forms.PictureBox pcbLogo;
-        private System.Windows.Forms.Button btnAbrir;
-        private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.ErrorProvider erpError;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.ErrorProvider erpErrorCB;
+        private System.Windows.Forms.ErrorProvider erpErrorLB;
+        private System.Windows.Forms.OpenFileDialog ofdAbrir;
+        private System.Windows.Forms.SaveFileDialog sfdGuardar;
     }
 }
 
