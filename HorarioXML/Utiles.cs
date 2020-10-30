@@ -11,6 +11,7 @@ namespace HorarioXML
 {
     class Utiles
     {
+        //Metodo que muestra el ErroProvider si no esta seleccionado el ComboBox indicado
         private Boolean errorProviderCB(ComboBox cb, ErrorProvider ep, Label lbl)
         {
             bool error = false;
@@ -24,6 +25,7 @@ namespace HorarioXML
             return error;
         }
 
+        //Metodo que muestra el ErroProvider si no esta seleccionado el ListBox indicado
         private Boolean errorProviderLB(ListBox lb, ErrorProvider ep, Label lbl)
         {
             bool error = false;
@@ -37,6 +39,7 @@ namespace HorarioXML
             return error;
         }
 
+        //Metodo que comprueba que este seleccionado todos los campos de los ListBox
         public Boolean seleccionadoLB(ListBox[] listaLB, ErrorProvider erpError, Label[] lbl)
         {
             bool todo = false;
@@ -56,6 +59,7 @@ namespace HorarioXML
             return todo;
         }
 
+        //Metodo que comprueba que este seleccionado todos los campos de los ComboBox
         public Boolean seleccionadoCB(ComboBox[] listaCB, ErrorProvider erpError, Label[] lbl)
         {
             bool todo = false;
@@ -84,6 +88,7 @@ namespace HorarioXML
             }
         }
 
+        //Metodo que pone las horas en la tabla
         public void datosIniciales(DataSet dsDatos)
         {
             string[] horas = new string[] { "8:30 - 9:25", "9:25 - 10:20", "10:20 - 11:15",
@@ -92,6 +97,7 @@ namespace HorarioXML
             for (int i = 0; i < horas.Length; i++) { dsDatos.Tables[0].Rows.Add(horas[i]); }
         }
 
+        //Metodo que crea la tabla inicial
         public void crearTabla(DataSet dsDatos, DataGridView dgvHorario)
         {
             dsDatos.Clear();
@@ -109,6 +115,7 @@ namespace HorarioXML
 
         }
 
+        //metodo que añade los tooltip a cada celda del DataGridView dependiendo del curso y ciclo seleccionado
         public void addToolTip(DataGridView dgvHorario, ComboBox cmbCurso, ListBox lsbCiclo, ListBox lsbModulo)
         {
             string[] tooltipSegundoDam = { "Joaquín - Aula 209", "José Alberto - Aula 209", "Inmaculada - Aula 209",
@@ -124,22 +131,22 @@ namespace HorarioXML
 
             switch (op)
             {
-                case 1:
+                case 1: //PrimeroDAM
 
                     dgvHorario.CurrentCell.ToolTipText = tooltipPrimeroDam[lsbModulo.SelectedIndex];
                     break;
 
-                case 2:
+                case 2: //SegundoDAM
 
                     dgvHorario.CurrentCell.ToolTipText = tooltipSegundoDam[lsbModulo.SelectedIndex];
                     break;
 
-                case 3:
+                case 3: //PrimeroDAW
 
                     dgvHorario.CurrentCell.ToolTipText = tooltipPrimeroDaw[lsbModulo.SelectedIndex];
                     break;
 
-                case 4:
+                case 4: //SegundoDAW
 
                     dgvHorario.CurrentCell.ToolTipText = tooltipSegundoDaw[lsbModulo.SelectedIndex];
                     break;
@@ -150,11 +157,13 @@ namespace HorarioXML
             
         }
 
+        //MEtodo que elimina el tooltip del DataGridView en la celda actual
         public void deleteToolTip(DataGridView dgvHorario, ComboBox cmbHora, ListBox lsbModulo, ComboBox cmbDia)
         {
             dgvHorario.CurrentCell.ToolTipText = null;
         }
 
+        //Metodo que agrega la asignatura y el tooltip a la celda actual del DataGridView
         public void agregarDato(DataGridView dgvHorario, ComboBox cmbCurso, ListBox lsbModulo, ListBox lsbCiclo)
         {
             string modulo = lsbModulo.Text;
@@ -163,6 +172,7 @@ namespace HorarioXML
             addToolTip(dgvHorario, cmbCurso, lsbCiclo, lsbModulo);
         }
 
+        //Metodo que comprueba el curso y el ciclo que se ha seleccionado
         private int comprobarCursoCiclo(ListBox lsbModulo, ListBox lsbCiclo, ComboBox cmbCurso)
         {
             int curso = 0;
@@ -185,6 +195,7 @@ namespace HorarioXML
             return curso;
         }
 
+        //Metodo que cambias las asignaturas del ListBox de modulo dependiendo del ciclo y el curso seleccionado
         public void cambiarAsig(ListBox lsbModulo, ListBox lsbCiclo, ComboBox cmbCurso)
         {
             string[] segundoDam = {"ACCESO A DATOS", "DESARROLLO DE INTERFACES", "SISTEMAS DE GESTIÓN EMPRESARIAL",
@@ -198,7 +209,7 @@ namespace HorarioXML
             switch (op)
             {
 
-                case 1:
+                case 1: //PrimeroDAM
                     lsbModulo.Items.Clear();
                     for (int i = 0; i < primero.Length; i++)
                     {
@@ -206,7 +217,7 @@ namespace HorarioXML
                     }
                     break;
 
-                case 2:
+                case 2: //SegundoDAM
 
                     lsbModulo.Items.Clear();
                     for (int i = 0; i < segundoDam.Length; i++)
@@ -215,7 +226,7 @@ namespace HorarioXML
                     }
                     break;
 
-                case 3:
+                case 3: //PrimeroDAW
 
                     lsbModulo.Items.Clear();
                     for (int i = 0; i < primero.Length; i++)
@@ -224,7 +235,7 @@ namespace HorarioXML
                     }
                     break;
 
-                case 4:
+                case 4: //SegundoDAW
 
                     lsbModulo.Items.Clear();
                     for (int i = 0; i < segundoDaw.Length; i++)
@@ -238,6 +249,7 @@ namespace HorarioXML
             }
         }
 
+        //Metodo que generar el XML que guardaremos
         public void generarXML(SaveFileDialog sfdGuardar, DataGridView dgvHorario)
         {
             if (sfdGuardar.ShowDialog() == DialogResult.OK)
@@ -283,7 +295,7 @@ namespace HorarioXML
                     "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-
+        //Metodo que comprueba que todas las celdas contengan un valor y activa el boton guardar
         public void tablaCompleta(DataGridView dgvHorario, Button btnGuardar)
         {
             bool vacio = false;
