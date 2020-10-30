@@ -31,12 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.dgvHorario = new System.Windows.Forms.DataGridView();
-            this.Hora = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Lunes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Martes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Miercoles = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Jueves = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Viernes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dsDatos = new System.Data.DataSet();
             this.grbHorario = new System.Windows.Forms.GroupBox();
             this.cmbDia = new System.Windows.Forms.ComboBox();
@@ -73,61 +67,21 @@
             this.dgvHorario.AllowUserToAddRows = false;
             this.dgvHorario.AllowUserToDeleteRows = false;
             this.dgvHorario.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvHorario.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dgvHorario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvHorario.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Hora,
-            this.Lunes,
-            this.Martes,
-            this.Miercoles,
-            this.Jueves,
-            this.Viernes});
             this.dgvHorario.Location = new System.Drawing.Point(13, 13);
+            this.dgvHorario.MultiSelect = false;
             this.dgvHorario.Name = "dgvHorario";
             this.dgvHorario.ReadOnly = true;
             this.dgvHorario.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvHorario.Size = new System.Drawing.Size(778, 272);
             this.dgvHorario.TabIndex = 0;
+            this.dgvHorario.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHorario_CellValueChanged);
             this.dgvHorario.Click += new System.EventHandler(this.dgvHorario_Click);
-            // 
-            // Hora
-            // 
-            this.Hora.HeaderText = "Hora";
-            this.Hora.Name = "Hora";
-            this.Hora.ReadOnly = true;
-            // 
-            // Lunes
-            // 
-            this.Lunes.HeaderText = "Lunes";
-            this.Lunes.Name = "Lunes";
-            this.Lunes.ReadOnly = true;
-            // 
-            // Martes
-            // 
-            this.Martes.HeaderText = "Martes";
-            this.Martes.Name = "Martes";
-            this.Martes.ReadOnly = true;
-            // 
-            // Miercoles
-            // 
-            this.Miercoles.HeaderText = "Miercoles";
-            this.Miercoles.Name = "Miercoles";
-            this.Miercoles.ReadOnly = true;
-            // 
-            // Jueves
-            // 
-            this.Jueves.HeaderText = "Jueves";
-            this.Jueves.Name = "Jueves";
-            this.Jueves.ReadOnly = true;
-            // 
-            // Viernes
-            // 
-            this.Viernes.HeaderText = "Viernes";
-            this.Viernes.Name = "Viernes";
-            this.Viernes.ReadOnly = true;
             // 
             // dsDatos
             // 
-            this.dsDatos.DataSetName = "NewDataSet";
+            this.dsDatos.DataSetName = "dsDatos";
             // 
             // grbHorario
             // 
@@ -305,8 +259,12 @@
             this.btnAdd.BackColor = System.Drawing.Color.Transparent;
             this.btnAdd.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAdd.BackgroundImage")));
             this.btnAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnAdd.FlatAppearance.BorderSize = 0;
+            this.btnAdd.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnAdd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.ForeColor = System.Drawing.Color.Transparent;
-            this.btnAdd.Location = new System.Drawing.Point(747, 573);
+            this.btnAdd.Location = new System.Drawing.Point(747, 569);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(44, 42);
             this.btnAdd.TabIndex = 6;
@@ -318,9 +276,13 @@
             this.btnDelete.BackColor = System.Drawing.Color.Transparent;
             this.btnDelete.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnDelete.BackgroundImage")));
             this.btnDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnDelete.Location = new System.Drawing.Point(687, 573);
+            this.btnDelete.FlatAppearance.BorderSize = 0;
+            this.btnDelete.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Location = new System.Drawing.Point(701, 572);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(44, 42);
+            this.btnDelete.Size = new System.Drawing.Size(39, 38);
             this.btnDelete.TabIndex = 7;
             this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -348,7 +310,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(803, 626);
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.ClientSize = new System.Drawing.Size(803, 613);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.pcbLogo);
@@ -396,12 +359,6 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.ErrorProvider erpErrorCB;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Hora;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Lunes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Martes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Miercoles;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Jueves;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Viernes;
         private System.Windows.Forms.ErrorProvider erpErrorLB;
         private System.Windows.Forms.OpenFileDialog ofdAbrir;
         private System.Windows.Forms.SaveFileDialog sfdGuardar;
