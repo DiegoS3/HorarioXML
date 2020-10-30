@@ -218,17 +218,11 @@
             this.lsbCiclo.Name = "lsbCiclo";
             this.lsbCiclo.Size = new System.Drawing.Size(176, 173);
             this.lsbCiclo.TabIndex = 6;
+            this.lsbCiclo.SelectedIndexChanged += new System.EventHandler(this.lsbCiclo_SelectedIndexChanged);
             // 
             // lsbModulo
             // 
             this.lsbModulo.FormattingEnabled = true;
-            this.lsbModulo.Items.AddRange(new object[] {
-            "ACCESO A DATOS",
-            "DESARROLLO DE INTERFACES",
-            "SISTEMAS DE GESTIÓN EMPRESARIAL",
-            "EMPRESA E INICIATIVA EMPRENDEDORA",
-            "PROGR. DE SERVICIOS Y PROCESOS",
-            "PROGR. MULTIMEDIA Y DISPOSITIVOS MÓVILES"});
             this.lsbModulo.Location = new System.Drawing.Point(238, 91);
             this.lsbModulo.Name = "lsbModulo";
             this.lsbModulo.Size = new System.Drawing.Size(300, 147);
@@ -244,6 +238,7 @@
             this.cmbCurso.Name = "cmbCurso";
             this.cmbCurso.Size = new System.Drawing.Size(173, 21);
             this.cmbCurso.TabIndex = 4;
+            this.cmbCurso.SelectedIndexChanged += new System.EventHandler(this.cmbCurso_SelectedIndexChanged);
             // 
             // lblCurso
             // 

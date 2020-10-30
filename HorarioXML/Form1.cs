@@ -14,7 +14,7 @@ namespace HorarioXML
     public partial class frmMain : Form
     {
 
-        Comprobar c = new Comprobar();
+        Utiles c = new Utiles();
         ListBox[] listaLB;
         Label[] listaLblLb, listaLblCb;
         ComboBox[] listaCB;
@@ -29,16 +29,9 @@ namespace HorarioXML
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            datosIniciales();
-        }
-
-        private void datosIniciales()
-        {
-            string[] horas = new string[] { "8:30 - 9:25", "9:25 - 10:20", "10:20 - 11:15",
-                "11:45 - 12:40", "12:40 - 13:35", "13:35 - 14:30"};
-
-            for (int i = 0; i < horas.Length; i++) { dgvHorario.Rows.Add(horas[i]); }
-        }
+            c.datosIniciales(this.dgvHorario);
+            this.lsbModulo.Items.Clear();
+        }        
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -57,18 +50,9 @@ namespace HorarioXML
 
             } else {
 
-                agregarDato();
+                c.agregarDato(this.dgvHorario, this.cmbHora, this.lsbModulo, this.cmbDia, this.lsbCiclo);                
                 btnGuardar.Enabled = true;
             }
-        }
-
-        private void agregarDato()
-        {
-            string ciclo = this.lsbCiclo.SelectedItem.ToString();
-            string modulo = this.lsbModulo.SelectedItem.ToString();
-
-            this.dgvHorario.Rows[this.cmbHora.SelectedIndex].Cells[this.cmbDia.SelectedIndex + 1].Value = modulo;
-
         }
 
         private void dgvHorario_Click(object sender, EventArgs e)
@@ -108,6 +92,7 @@ namespace HorarioXML
             else
             {
                 this.dgvHorario.Rows[this.cmbHora.SelectedIndex].Cells[this.cmbDia.SelectedIndex + 1].Value = "";
+                this.c.deleteToolTip(this.dgvHorario, this.cmbHora, this.lsbModulo, this.cmbDia);
             }
         }
 
@@ -119,18 +104,19 @@ namespace HorarioXML
             {
                 ruta = ofdAbrir.FileName;
                 //limpiarDatos();
+                c.crearTabla(this.dsDatos, this.dgvHorario);
 
                 //Se lee el XML con un XMLDocument
                 xDoc = new XmlDocument();
                 xDoc.Load(ruta);
                 //Añadimos la tabla al horario directamente, con las columnas fijas
-                dsDatos.Tables.Add(new DataTable("horario"));
-                dsDatos.Tables[0].Columns.Add("Hora", typeof(string));
+                //dsDatos.Tables.Add(new DataTable("horario"));
+                /*dsDatos.Tables[0].Columns.Add("Hora", typeof(string));
                 dsDatos.Tables[0].Columns.Add("Lunes", typeof(string));
                 dsDatos.Tables[0].Columns.Add("Martes", typeof(string));
                 dsDatos.Tables[0].Columns.Add("Miercoles", typeof(string));
                 dsDatos.Tables[0].Columns.Add("Jueves", typeof(string));
-                dsDatos.Tables[0].Columns.Add("Viernes", typeof(string));
+                dsDatos.Tables[0].Columns.Add("Viernes", typeof(string));*/
 
                 //Recorremos el XMLDocument y vamos rellenando el DataSet junto con los tooltiptext
                 XmlNodeList horario = xDoc.GetElementsByTagName("horario");
@@ -189,7 +175,6 @@ namespace HorarioXML
 
         private void generarXML()
         {
-
             if (sfdGuardar.ShowDialog() == DialogResult.OK)
             {
                 //se crea el elemento raíz y se asocia al documento
@@ -234,10 +219,20 @@ namespace HorarioXML
             }
         }
 
+        private void lsbCiclo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            c.cambiarAsig(this.lsbModulo, this.lsbCiclo, this.cmbCurso);
+        }
+
+        private void cmbCurso_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            c.cambiarAsig(this.lsbModulo, this.lsbCiclo, this.cmbCurso);
+        }
+
         private void comprobarSeleccion()
         {
             this.cmbHora.SelectedIndex = this.dgvHorario.CurrentRow.Index;
             this.cmbDia.SelectedIndex = this.dgvHorario.CurrentCell.ColumnIndex - 1;
-        }
+        }        
     }
 }
